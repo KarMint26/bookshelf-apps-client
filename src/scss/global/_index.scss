@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+$primary-color: rgb(25, 186, 235);
+$secondary-color: rgb(0, 135, 177);
+
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+/* Scrollbar Style */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) var(--secondary-color) 100%;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--primary-color);
+  background: linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  background: -moz-linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+}
+
+html {
+  scroll-behavior: smooth !important;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+main {
+  padding: 7rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  .wrapper-content {
+    align-self: flex-start;
+
+    h1 {
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+    }
+  }
+}
+
+.create-book-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  color: #fff;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  text-align: center;
+  line-height: 40px;
+  transition: 300ms ease-in-out;
+
+  &:hover {
+    transform: rotate(180deg);
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: 8rem 3.5rem;
+    gap: 3rem;
+
+    .wrapper-content {
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .create-book-btn {
+    bottom: 1rem;
+    right: 1.5rem;
+    font-size: 3rem;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+  }
+}
