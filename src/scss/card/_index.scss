@@ -63,18 +63,18 @@
       }
 
       .btn-finish {
-        background-color: rgb(3, 180, 83);
+        background-color: var(--green-normal);
 
         &:hover {
-          background-color: rgb(0, 151, 68);
+          background-color: var(--green-hover);
         }
       }
 
       .btn-delete {
-        background-color: rgb(255, 0, 119);
+        background-color: var(--red-normal);
 
         &:hover {
-          background-color: rgb(209, 0, 98);
+          background-color: var(--red-hover);
         }
       }
     }
@@ -90,7 +90,7 @@
     .card {
       .btn-field {
         .btn {
-          font-size: .7rem;
+          font-size: .65rem;
         }
       }
     }

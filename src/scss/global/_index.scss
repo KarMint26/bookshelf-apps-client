@@ -2,10 +2,22 @@
 
 $primary-color: rgb(25, 186, 235);
 $secondary-color: rgb(0, 135, 177);
+$green-normal: rgb(3, 180, 83);
+$green-hover: rgb(0, 151, 68);
+$red-normal: rgb(255, 0, 119);
+$red-hover: rgb(209, 0, 98);
+$gray-normal: #868686;
+$gray-hover: #686868;
 
 :root {
   --primary-color: #{$primary-color};
   --secondary-color: #{$secondary-color};
+  --green-normal: #{$green-normal};
+  --green-hover: #{$green-hover};
+  --red-normal: #{$red-normal};
+  --red-hover: #{$red-hover};
+  --gray-normal: #{$gray-normal};
+  --gray-hover: #{$gray-hover};
 }
 
 * {

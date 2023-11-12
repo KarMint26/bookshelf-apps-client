@@ -84,7 +84,7 @@
     <div class="container-create-book">
       <form class="create-form">
         <img src="./src/assets/close.svg" alt="close" class="close-buton" />
-        <h1>Add New Book</h1>
+        <h1 id="title-form-create">Add New Book</h1>
         <div class="field">
           <label for="title">Title</label>
           <input type="text" name="title" id="title" placeholder="book title" />
@@ -116,6 +116,23 @@
           <img src="./src/assets/create.svg" alt="create-icon" />
         </button>
       </form>
+    </div>
+
+    <!-- Custom Modal Dialog Delete Book -->
+    <div class="modal-delete-container">
+      <div class="modal-delete">
+        <h1>Ingin Menghapus Buku ?</h1>
+        <div class="modal-delete-btn">
+          <div class="btn" id="cancel">
+            <img src="./src/assets/repeat.svg" alt="img-cancel-delete">
+            <p>Batal</p>
+          </div>
+          <div class="btn" id="accept">
+            <img src="./src/assets/delete.svg" alt="img-delete">
+            <p>Hapus</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Button Create Book -->

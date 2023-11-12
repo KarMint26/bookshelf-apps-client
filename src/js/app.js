@@ -10,16 +10,23 @@
 
 // LocalStorage and Custom Event Variable
 const RENDER_EVENT = "renderBook";
+const SEARCH_EVENT = "searchBook";
 const STORAGE_KEY = "books";
 const books = [];
+let bookDeleteTarget = 0;
 
 // Initial Variable DOM
+const cancelBtn = document.getElementById("cancel");
+const accBtn = document.getElementById("accept");
 const closeBtn = document.querySelector(".close-buton");
 const createBook = document.querySelector(".submit-create-book");
+const titleFormCreateBook = document.getElementById("title-form-create");
 const modalBtn = document.querySelector(".create-book-btn");
 const modalContainer = document.querySelector(".container-create-book");
+const modalDeleteContainer = document.querySelector(".modal-delete-container");
 const formCreateBook = document.querySelector(".create-form");
 const formSearchBook = document.querySelector(".search-form");
+const searchField = document.querySelector(".search-field");
 const containerBooks = document.querySelector(".container-books");
 const containerCompleteBooks = document.querySelector(
   ".container-complete-books"
@@ -38,12 +45,22 @@ modalBtn.addEventListener("click", () => {
   finishedBook.checked = false;
   modalContainer.classList.add("active");
   formCreateBook.classList.add("active");
+  titleFormCreateBook.innerHTML = "Add New Book"
 });
 
 closeBtn.addEventListener("click", () => {
   modalContainer.classList.remove("active");
   formCreateBook.classList.remove("active");
 });
+
+cancelBtn.addEventListener("click", () => {
+  modalDeleteContainer.classList.remove("active");
+});
+
+accBtn.addEventListener("click", () => {
+  modalDeleteContainer.classList.remove("active");
+  removeBookFromCompleted(bookDeleteTarget)
+})
 
 // Function utility
 const generateId = () => {
@@ -173,7 +190,8 @@ function makeBook(bookObject) {
     });
 
     newDeleteButton.addEventListener("click", () => {
-      removeBookFromCompleted(id);
+      modalDeleteContainer.classList.add("active");
+      bookDeleteTarget = id
     });
 
     btnField.append(newFinishButton, newDeleteButton);
@@ -198,7 +216,8 @@ function makeBook(bookObject) {
     });
 
     newDeleteButton.addEventListener("click", () => {
-      removeBookFromCompleted(id);
+      modalDeleteContainer.classList.add("active");
+      bookDeleteTarget = id
     });
 
     btnField.append(newFinishButton, newDeleteButton);
@@ -260,18 +279,25 @@ const removeBookFromCompleted = (bookId) => {
   saveData();
 };
 
-// Search Functionality
-formSearchBook.addEventListener("submit", (e) => {
-  e.preventDefault();
-});
-
 // When DOM Load
 document.addEventListener("DOMContentLoaded", () => {
+  // Add Book Functionality
   formCreateBook.addEventListener("submit", (e) => {
     e.preventDefault();
     addBook();
     modalContainer.classList.remove("active");
     formCreateBook.classList.remove("active");
+  });
+
+  // Search Functionality
+  formSearchBook.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const bookRequest = searchField.value;
+    if (bookRequest !== "") {
+      searchBookByTitle(bookRequest);
+    } else {
+      document.dispatchEvent(new Event(RENDER_EVENT));
+    }
   });
 
   if (isStorageExist()) {
@@ -280,12 +306,48 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Custom Event
-document.addEventListener(RENDER_EVENT, function () {
+document.addEventListener(RENDER_EVENT, () => {
   // clearing list item
   containerBooks.innerHTML = "";
   containerCompleteBooks.innerHTML = "";
 
   for (const booksItem of books) {
+    const booksElement = makeBook(booksItem);
+    if (booksItem.isCompleted) {
+      containerCompleteBooks.append(booksElement);
+    } else {
+      containerBooks.append(booksElement);
+    }
+  }
+});
+
+// Search Functionality
+const searchBookByTitle = (bookTitle) => {
+  const booksQuery = books.filter((book) => {
+    const titleLowerCase = book.title.toLowerCase();
+    const searchLowerCase = bookTitle.toLowerCase();
+
+    for (let i = 0; i < searchLowerCase.length; i++) {
+      if (titleLowerCase[i] !== searchLowerCase[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  document.dispatchEvent(
+    new CustomEvent(SEARCH_EVENT, { detail: { booksQuery: booksQuery } })
+  );
+};
+
+document.addEventListener(SEARCH_EVENT, (e) => {
+  const bookList = e.detail.booksQuery;
+
+  containerBooks.innerHTML = "";
+  containerCompleteBooks.innerHTML = "";
+
+  for (const booksItem of bookList) {
     const booksElement = makeBook(booksItem);
     if (booksItem.isCompleted) {
       containerCompleteBooks.append(booksElement);
