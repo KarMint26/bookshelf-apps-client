@@ -72,11 +72,11 @@ const generateId = () => {
 
 const generateBookObject = (id, title, author, year, isCompleted) => {
   return {
-    id,
-    title,
-    author,
-    year,
-    isCompleted,
+    id: Number(id),
+    title: String(title),
+    author: String(author),
+    year: Number(year),
+    isCompleted: Boolean(isCompleted),
   };
 };
 
@@ -332,7 +332,7 @@ const updateBook = () => {
 
   bookTarget.title = titleBook.value;
   bookTarget.author = authorBook.value;
-  bookTarget.year = yearBook.value;
+  bookTarget.year = Number(yearBook.value);
   bookTarget.isCompleted = finishedBook.checked;
 
   document.dispatchEvent(new Event(RENDER_EVENT));
