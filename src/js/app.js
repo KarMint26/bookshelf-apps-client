@@ -1,12 +1,12 @@
-/**
- * {
-  id: 3657848524,
-  title: 'Harry Potter and the Philosopher\'s Stone',
-  author: 'J.K Rowling',
-  year: 1997,
-  isComplete: false,
+// PWA Service Worker
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker
+      .register("/serviceWorker.js")
+      .then((res) => console.log("service worker registered"))
+      .catch((err) => console.log("service worker not registered", err));
+  });
 }
- */
 
 // LocalStorage and Custom Event Variable
 const RENDER_EVENT = "renderBook";
@@ -48,7 +48,7 @@ modalBtn.addEventListener("click", () => {
   modalContainer.classList.add("active");
   formCreateBook.classList.add("active");
   titleFormCreateBook.innerHTML = "Add New Book";
-  txtBtnForm.innerText = "Add"
+  txtBtnForm.innerText = "Add";
 });
 
 closeBtn.addEventListener("click", () => {
