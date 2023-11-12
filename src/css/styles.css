@@ -179,6 +179,7 @@ nav .github:hover {
 }
 .container-books .card,
 .container-complete-books .card {
+  position: relative;
   background-color: #fff;
   padding: 1rem;
   display: flex;
@@ -188,15 +189,17 @@ nav .github:hover {
   gap: 0.5rem;
   border-radius: 12px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 .container-books .card .title-book,
 .container-complete-books .card .title-book {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--secondary-color);
 }
 .container-books .card .author-book,
 .container-complete-books .card .author-book {
+  font-size: 0.9rem;
   color: rgb(90, 90, 90);
   font-weight: 500;
 }
@@ -223,7 +226,7 @@ nav .github:hover {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   cursor: pointer;
   transition: 300ms ease-in-out;
 }
@@ -247,12 +250,39 @@ nav .github:hover {
 .container-complete-books .card .btn-field .btn-delete:hover {
   background-color: var(--red-hover);
 }
+.container-books .card .update-btn,
+.container-complete-books .card .update-btn {
+  background-color: var(--secondary-color);
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0 0 1rem;
+  width: 30px;
+  height: 30px;
+  padding: 0.8rem;
+  cursor: pointer;
+}
+.container-books .card .update-btn img,
+.container-complete-books .card .update-btn img {
+  width: 15px;
+}
 
 @media (min-width: 768px) {
   .container-books,
   .container-complete-books {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+  .container-books .card .title-book,
+  .container-complete-books .card .title-book {
+    font-size: 1.4rem;
+  }
+  .container-books .card .author-book,
+  .container-complete-books .card .author-book {
+    font-size: 1rem;
   }
   .container-books .card .btn-field .btn,
   .container-complete-books .card .btn-field .btn {
@@ -265,9 +295,22 @@ nav .github:hover {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
+  .container-books .card .title-book,
+  .container-complete-books .card .title-book {
+    font-size: 1.5rem;
+  }
   .container-books .card .btn-field .btn,
   .container-complete-books .card .btn-field .btn {
     font-size: 1rem;
+  }
+  .container-books .card .update-btn,
+  .container-complete-books .card .update-btn {
+    width: 35px;
+    height: 35px;
+  }
+  .container-books .card .update-btn img,
+  .container-complete-books .card .update-btn img {
+    width: 18px;
   }
 }
 .container-create-book {
@@ -440,8 +483,11 @@ nav .github:hover {
 .modal-delete-container .modal-delete .modal-delete-btn .btn:last-child:hover {
   background-color: var(--red-hover);
 }
+.modal-delete-container .modal-delete .modal-delete-btn .btn p {
+  font-size: 0.8rem;
+}
 .modal-delete-container .modal-delete .modal-delete-btn .btn img {
-  width: 20px;
+  width: 15px;
 }
 
 @media (min-width: 768px) {
@@ -455,6 +501,12 @@ nav .github:hover {
   .modal-delete-container .modal-delete .modal-delete-btn .btn {
     padding: 0.8rem 1.2rem;
     width: 120px;
+  }
+  .modal-delete-container .modal-delete .modal-delete-btn .btn p {
+    font-size: 1rem;
+  }
+  .modal-delete-container .modal-delete .modal-delete-btn .btn img {
+    width: 20px;
   }
   .modal-delete-container .modal-delete h1 {
     font-size: 2rem;

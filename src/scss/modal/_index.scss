@@ -195,8 +195,12 @@
           }
         }
 
+        p {
+          font-size: .8rem;
+        }
+
         img {
-          width: 20px;
+          width: 15px;
         }
       }
     }
@@ -215,6 +219,14 @@
         .btn {
           padding: .8rem 1.2rem;
           width: 120px;
+
+          p {
+            font-size: 1rem;
+          }
+
+          img {
+            width: 20px;
+          }
         }
       }
 

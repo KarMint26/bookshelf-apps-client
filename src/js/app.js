@@ -14,6 +14,7 @@ const SEARCH_EVENT = "searchBook";
 const STORAGE_KEY = "books";
 const books = [];
 let bookDeleteTarget = 0;
+let updateBookTarget = 0;
 
 // Initial Variable DOM
 const cancelBtn = document.getElementById("cancel");
@@ -28,6 +29,7 @@ const formCreateBook = document.querySelector(".create-form");
 const formSearchBook = document.querySelector(".search-form");
 const searchField = document.querySelector(".search-field");
 const containerBooks = document.querySelector(".container-books");
+const txtBtnForm = document.getElementById("txt-btn-form");
 const containerCompleteBooks = document.querySelector(
   ".container-complete-books"
 );
@@ -45,7 +47,8 @@ modalBtn.addEventListener("click", () => {
   finishedBook.checked = false;
   modalContainer.classList.add("active");
   formCreateBook.classList.add("active");
-  titleFormCreateBook.innerHTML = "Add New Book"
+  titleFormCreateBook.innerHTML = "Add New Book";
+  txtBtnForm.innerText = "Add"
 });
 
 closeBtn.addEventListener("click", () => {
@@ -59,8 +62,8 @@ cancelBtn.addEventListener("click", () => {
 
 accBtn.addEventListener("click", () => {
   modalDeleteContainer.classList.remove("active");
-  removeBookFromCompleted(bookDeleteTarget)
-})
+  removeBookFromCompleted(bookDeleteTarget);
+});
 
 // Function utility
 const generateId = () => {
@@ -191,12 +194,33 @@ function makeBook(bookObject) {
 
     newDeleteButton.addEventListener("click", () => {
       modalDeleteContainer.classList.add("active");
-      bookDeleteTarget = id
+      bookDeleteTarget = id;
     });
 
     btnField.append(newFinishButton, newDeleteButton);
 
-    cardContainer.append(btnField);
+    const updateBtn = document.createElement("div");
+    updateBtn.classList.add("update-btn");
+
+    const updateImg = document.createElement("img");
+    updateImg.src = "./src/assets/update.svg";
+    updateImg.alt = "update-icon";
+
+    updateBtn.append(updateImg);
+
+    updateBtn.addEventListener("click", () => {
+      updateBookTarget = id;
+      modalContainer.classList.add("active");
+      formCreateBook.classList.add("active");
+      titleFormCreateBook.innerHTML = "Edit Book";
+      txtBtnForm.innerText = "Update";
+      document.getElementById("title").value = title;
+      document.getElementById("author").value = author;
+      document.getElementById("year").value = year;
+      finishedBook.checked = isCompleted;
+    });
+
+    cardContainer.append(btnField, updateBtn);
   } else {
     const newFinishButton = createButton(
       "btn-finish",
@@ -217,12 +241,33 @@ function makeBook(bookObject) {
 
     newDeleteButton.addEventListener("click", () => {
       modalDeleteContainer.classList.add("active");
-      bookDeleteTarget = id
+      bookDeleteTarget = id;
     });
 
     btnField.append(newFinishButton, newDeleteButton);
 
-    cardContainer.append(btnField);
+    const updateBtn = document.createElement("div");
+    updateBtn.classList.add("update-btn");
+
+    const updateImg = document.createElement("img");
+    updateImg.src = "./src/assets/update.svg";
+    updateImg.alt = "update-icon";
+
+    updateBtn.append(updateImg);
+
+    updateBtn.addEventListener("click", () => {
+      updateBookTarget = id;
+      modalContainer.classList.add("active");
+      formCreateBook.classList.add("active");
+      titleFormCreateBook.innerHTML = "Edit Book";
+      txtBtnForm.innerText = "Update";
+      document.getElementById("title").value = title;
+      document.getElementById("author").value = author;
+      document.getElementById("year").value = year;
+      finishedBook.checked = isCompleted;
+    });
+
+    cardContainer.append(btnField, updateBtn);
   }
   return cardContainer;
 }
@@ -279,12 +324,32 @@ const removeBookFromCompleted = (bookId) => {
   saveData();
 };
 
+// Feature Update Data
+const updateBook = () => {
+  const bookTarget = findBook(updateBookTarget);
+
+  if (bookTarget == null) return;
+
+  bookTarget.title = titleBook.value;
+  bookTarget.author = authorBook.value;
+  bookTarget.year = yearBook.value;
+  bookTarget.isCompleted = finishedBook.checked;
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+
+  saveData();
+};
+
 // When DOM Load
 document.addEventListener("DOMContentLoaded", () => {
   // Add Book Functionality
   formCreateBook.addEventListener("submit", (e) => {
     e.preventDefault();
-    addBook();
+    if (titleFormCreateBook.innerHTML === "Add New Book") {
+      addBook();
+    } else {
+      updateBook();
+    }
     modalContainer.classList.remove("active");
     formCreateBook.classList.remove("active");
   });
