@@ -28,10 +28,7 @@
       itemprop="image"
       content="https://carls-bookshelf.netlify.app/src/assets/preview.png"
     />
-    <meta
-      property="og:url"
-      content="https://carls-bookshelf.netlify.app"
-    />
+    <meta property="og:url" content="https://carls-bookshelf.netlify.app" />
     <meta property="og:type" content="website" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="250" />
@@ -97,7 +94,13 @@
         <h1 id="title-form-create">Add New Book</h1>
         <div class="field">
           <label for="title">Title</label>
-          <input type="text" name="title" id="title" placeholder="book title" />
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="book title"
+            required
+          />
         </div>
         <div class="field">
           <label for="author">Author</label>
@@ -106,6 +109,7 @@
             name="author"
             id="author"
             placeholder="book author"
+            required
           />
         </div>
         <div class="field">
@@ -115,6 +119,7 @@
             name="year"
             id="year"
             placeholder="book year released"
+            required
           />
         </div>
         <div class="checkbox">
@@ -134,11 +139,11 @@
         <h1>Want to Delete Book ?</h1>
         <div class="modal-delete-btn">
           <div class="btn" id="cancel">
-            <img src="./src/assets/repeat.svg" alt="img-cancel-delete">
+            <img src="./src/assets/repeat.svg" alt="img-cancel-delete" />
             <p>Cancel</p>
           </div>
           <div class="btn" id="accept">
-            <img src="./src/assets/delete.svg" alt="img-delete">
+            <img src="./src/assets/delete.svg" alt="img-delete" />
             <p>Delete</p>
           </div>
         </div>
